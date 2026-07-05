@@ -2,6 +2,8 @@
 
 This document provides a detailed overview of your e-commerce repository's architecture, maps out all database models and relationships, outlines a recommended frontend architecture using Next.js, and lists the exact things you will need to implement a frontend client.
 
+<img width="1894" height="3142" alt="image" src="https://github.com/user-attachments/assets/8b5f995f-8c51-40da-b1bd-62af6737cb74" />
+
 ---
 
 ## 1. Current Backend Architecture
