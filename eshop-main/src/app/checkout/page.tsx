@@ -31,10 +31,15 @@ export default function CheckoutPage() {
     setError(null);
     setSubmitting(true);
     try {
+      const nameParts = form.fullName.trim().split(/\s+/);
+      const firstName = nameParts[0] || '';
+      const lastName = nameParts.slice(1).join(' ');
+
       const { data } = await createOrder({
         variables: {
           shippingAddress: {
-            fullName: form.fullName,
+            firstName,
+            lastName,
             addressLine1: form.addressLine1,
             addressLine2: form.addressLine2,
             city: form.city,
