@@ -61,7 +61,7 @@ async function startServer() {
   // Create Apollo Server
   const server = new ApolloServer({
     schema,
-    introspection: config.graphql.introspectionEnabled,
+    introspection: config.graphql.introspectionEnabled || config.nodeEnv === 'development',
     formatError: (formattedError: GraphQLFormattedError, error: unknown) => {
       if (error instanceof AppError) {
         return {

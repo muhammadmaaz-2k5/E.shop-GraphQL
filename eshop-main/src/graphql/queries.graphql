@@ -1,0 +1,67 @@
+query GetProducts($first: Int, $after: String) {
+  products(pagination: { first: $first, after: $after }) {
+    edges {
+      node {
+        id
+        name
+        sku
+        price
+        slug
+        description
+        thumbnailUrl
+      }
+    }
+    totalCount
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+}
+
+query GetProduct($slug: String!) {
+  productBySlug(slug: $slug) {
+    id
+    name
+    sku
+    price
+    slug
+    description
+    thumbnailUrl
+  }
+}
+
+query GetMe {
+  me {
+    id
+    email
+    role
+    firstName
+    lastName
+  }
+}
+
+query GetCart {
+  cart {
+    id
+    subtotal
+    total
+    items {
+      id
+      productId
+      quantity
+      unitPrice
+      totalPrice
+    }
+  }
+}
+
+query GetOrders {
+  orders {
+    id
+    orderNumber
+    status
+    total
+    createdAt
+  }
+}
