@@ -171,12 +171,17 @@ async function createTokens(user: User): Promise<AuthTokens> {
   
   // Store refresh token in database
   const expiresAt = new Date(Date.now() + refreshExpiresInSeconds * 1000);
-  await RefreshTokenModel.create({
-    userId: user.id,
-    tokenHash: hashToken(refreshToken),
-    expiresAt,
-    revoked: false
-  });
+  try {
+    await RefreshTokenModel.create({
+      userId: user.id,
+      tokenHash: hashToken(refreshToken),
+      expiresAt,
+      revoked: false
+    });
+  } catch (err: any) {
+    log.error({ err, errors: err.errors, message: err.message }, 'Failed to create refresh token in database');
+    throw err;
+  }
 
   return { accessToken, refreshToken, expiresIn: decoded.exp - decoded.iat };
 }
