@@ -175,12 +175,16 @@ export function initModels(sequelize: Sequelize) {
     phone: { type: DataTypes.TEXT },
     isActive: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true, field: 'is_active' },
     emailVerified: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false, field: 'email_verified' },
+    createdAt: { type: DataTypes.DATE, field: 'created_at' },
+    updatedAt: { type: DataTypes.DATE, field: 'updated_at' },
   }, { sequelize, tableName: 'users', timestamps: true, createdAt: 'created_at', updatedAt: 'updated_at' });
 
   AuthUser.init({
     id: { type: DataTypes.UUID, primaryKey: true, defaultValue: DataTypes.UUIDV4 },
     email: { type: DataTypes.TEXT, allowNull: false, unique: true },
     encryptedPassword: { type: DataTypes.TEXT, allowNull: false, field: 'encrypted_password' },
+    createdAt: { type: DataTypes.DATE, field: 'created_at' },
+    updatedAt: { type: DataTypes.DATE, field: 'updated_at' },
   }, { sequelize, schema: 'auth', tableName: 'users', timestamps: true, createdAt: 'created_at', updatedAt: 'updated_at' });
 
   RefreshToken.init({
@@ -189,6 +193,7 @@ export function initModels(sequelize: Sequelize) {
     tokenHash: { type: DataTypes.TEXT, allowNull: false, unique: true, field: 'token_hash' },
     expiresAt: { type: DataTypes.DATE, allowNull: false, field: 'expires_at' },
     revoked: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
+    createdAt: { type: DataTypes.DATE, field: 'created_at' },
   }, { sequelize, tableName: 'refresh_tokens', timestamps: true, createdAt: 'created_at', updatedAt: false });
 
   Category.init({
@@ -202,6 +207,8 @@ export function initModels(sequelize: Sequelize) {
     sortOrder: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0, field: 'sort_order' },
     metaTitle: { type: DataTypes.TEXT, field: 'meta_title' },
     metaDescription: { type: DataTypes.TEXT, field: 'meta_description' },
+    createdAt: { type: DataTypes.DATE, field: 'created_at' },
+    updatedAt: { type: DataTypes.DATE, field: 'updated_at' },
   }, { sequelize, tableName: 'categories', timestamps: true, createdAt: 'created_at', updatedAt: 'updated_at' });
 
   Brand.init({
@@ -212,6 +219,8 @@ export function initModels(sequelize: Sequelize) {
     logoUrl: { type: DataTypes.TEXT, field: 'logo_url' },
     isActive: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true, field: 'is_active' },
     websiteUrl: { type: DataTypes.TEXT, field: 'website_url' },
+    createdAt: { type: DataTypes.DATE, field: 'created_at' },
+    updatedAt: { type: DataTypes.DATE, field: 'updated_at' },
   }, { sequelize, tableName: 'brands', timestamps: true, createdAt: 'created_at', updatedAt: 'updated_at' });
 
   Product.init({
@@ -235,6 +244,8 @@ export function initModels(sequelize: Sequelize) {
     dimensions: { type: DataTypes.JSONB, defaultValue: { length: 0, width: 0, height: 0 } },
     metaTitle: { type: DataTypes.TEXT, field: 'meta_title' },
     metaDescription: { type: DataTypes.TEXT, field: 'meta_description' },
+    createdAt: { type: DataTypes.DATE, field: 'created_at' },
+    updatedAt: { type: DataTypes.DATE, field: 'updated_at' },
   }, { sequelize, tableName: 'products', timestamps: true, createdAt: 'created_at', updatedAt: 'updated_at' });
 
   Cart.init({
@@ -249,6 +260,8 @@ export function initModels(sequelize: Sequelize) {
     total: { type: DataTypes.DECIMAL(12, 2), allowNull: false, defaultValue: 0, get() { return parseFloat(this.getDataValue('total')); } },
     currency: { type: DataTypes.TEXT, allowNull: false, defaultValue: 'USD' },
     expiresAt: { type: DataTypes.DATE, field: 'expires_at' },
+    createdAt: { type: DataTypes.DATE, field: 'created_at' },
+    updatedAt: { type: DataTypes.DATE, field: 'updated_at' },
   }, { sequelize, tableName: 'carts', timestamps: true, createdAt: 'created_at', updatedAt: 'updated_at' });
 
   CartItem.init({
@@ -258,6 +271,8 @@ export function initModels(sequelize: Sequelize) {
     quantity: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 1 },
     unitPrice: { type: DataTypes.DECIMAL(12, 2), allowNull: false, field: 'unit_price', get() { return parseFloat(this.getDataValue('unitPrice')); } },
     totalPrice: { type: DataTypes.DECIMAL(12, 2), allowNull: false, field: 'total_price', get() { return parseFloat(this.getDataValue('totalPrice')); } },
+    createdAt: { type: DataTypes.DATE, field: 'created_at' },
+    updatedAt: { type: DataTypes.DATE, field: 'updated_at' },
   }, { sequelize, tableName: 'cart_items', timestamps: true, createdAt: 'created_at', updatedAt: 'updated_at' });
 
   Order.init({
@@ -276,6 +291,8 @@ export function initModels(sequelize: Sequelize) {
     couponId: { type: DataTypes.UUID, field: 'coupon_id' },
     notes: { type: DataTypes.TEXT },
     trackingNumber: { type: DataTypes.TEXT, field: 'tracking_number' },
+    createdAt: { type: DataTypes.DATE, field: 'created_at' },
+    updatedAt: { type: DataTypes.DATE, field: 'updated_at' },
   }, { sequelize, tableName: 'orders', timestamps: true, createdAt: 'created_at', updatedAt: 'updated_at' });
 
   OrderItem.init({
@@ -287,6 +304,7 @@ export function initModels(sequelize: Sequelize) {
     quantity: { type: DataTypes.INTEGER, allowNull: false },
     unitPrice: { type: DataTypes.DECIMAL(12, 2), allowNull: false, field: 'unit_price', get() { return parseFloat(this.getDataValue('unitPrice')); } },
     totalPrice: { type: DataTypes.DECIMAL(12, 2), allowNull: false, field: 'total_price', get() { return parseFloat(this.getDataValue('totalPrice')); } },
+    createdAt: { type: DataTypes.DATE, field: 'created_at' },
   }, { sequelize, tableName: 'order_items', timestamps: true, createdAt: 'created_at', updatedAt: false });
 
   Review.init({
@@ -299,6 +317,8 @@ export function initModels(sequelize: Sequelize) {
     isVerifiedPurchase: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false, field: 'is_verified_purchase' },
     isApproved: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true, field: 'is_approved' },
     helpfulVotes: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0, field: 'helpful_votes' },
+    createdAt: { type: DataTypes.DATE, field: 'created_at' },
+    updatedAt: { type: DataTypes.DATE, field: 'updated_at' },
   }, { sequelize, tableName: 'reviews', timestamps: true, createdAt: 'created_at', updatedAt: 'updated_at' });
 
   // Define Associations
