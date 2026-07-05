@@ -18,15 +18,16 @@ const PLACEHOLDER =
 export default async function ProductDetailPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
   let product: GetProductQuery['productBySlug'] | null = null;
 
   try {
     const client = getClient();
     const { data } = await client.query<GetProductQuery, GetProductQueryVariables>({
       query: GetProductDocument,
-      variables: { slug: params.slug },
+      variables: { slug },
     });
     product = data?.productBySlug ?? null;
   } catch {
