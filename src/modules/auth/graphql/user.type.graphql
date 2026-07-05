@@ -1,0 +1,93 @@
+# Authentication Types for GraphQL Schema
+
+type User {
+  id: ID!
+  email: String!
+  role: UserRole!
+  permissions: [String!]!
+  firstName: String
+  lastName: String
+  avatarUrl: String
+  phone: String
+  isActive: Boolean!
+  emailVerified: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  fullName: String
+}
+
+enum UserRole {
+  ADMIN
+  MANAGER
+  CUSTOMER
+}
+
+type AuthPayload {
+  accessToken: String!
+  refreshToken: String!
+  expiresIn: Int!
+  user: User!
+}
+
+type RefreshTokenPayload {
+  accessToken: String!
+  refreshToken: String!
+  expiresIn: Int!
+}
+
+input RegisterInput {
+  email: String!
+  password: String!
+  firstName: String
+  lastName: String
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input UpdateProfileInput {
+  firstName: String
+  lastName: String
+  phone: String
+  avatarUrl: String
+}
+
+input ChangePasswordInput {
+  currentPassword: String!
+  newPassword: String!
+}
+
+extend type Query {
+  me: User
+  user(id: ID!): User @auth(requires: ADMIN)
+  users(limit: Int = 20, offset: Int = 0): UserConnection! @auth(requires: ADMIN)
+}
+
+extend type Mutation {
+  register(input: RegisterInput!): AuthPayload!
+  login(input: LoginInput!): AuthPayload!
+  refreshToken(token: String!): RefreshTokenPayload!
+  logout: Boolean! @auth
+  updateProfile(input: UpdateProfileInput!): User! @auth
+  changePassword(input: ChangePasswordInput!): Boolean! @auth
+}
+
+type UserConnection {
+  edges: [UserEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type UserEdge {
+  node: User!
+  cursor: String!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
