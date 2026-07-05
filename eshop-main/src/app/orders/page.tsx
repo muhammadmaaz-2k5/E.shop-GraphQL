@@ -8,11 +8,11 @@ import {
 } from '@/graphql/__generated__/graphql';
 
 const statusColor: Record<string, string> = {
-  PENDING: 'bg-yellow-100 text-yellow-800',
-  PROCESSING: 'bg-blue-100 text-blue-800',
-  SHIPPED: 'bg-indigo-100 text-indigo-800',
-  DELIVERED: 'bg-green-100 text-green-800',
-  CANCELLED: 'bg-red-100 text-red-800',
+  PENDING: 'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20',
+  PROCESSING: 'bg-blue-500/10 text-blue-400 border border-blue-500/20',
+  SHIPPED: 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20',
+  DELIVERED: 'bg-green-500/10 text-green-400 border border-green-500/20',
+  CANCELLED: 'bg-red-500/10 text-red-400 border border-red-500/20',
 };
 
 export default function OrdersPage() {
@@ -21,7 +21,7 @@ export default function OrdersPage() {
   if (loading) {
     return (
       <div className="mx-auto max-w-7xl px-4 py-12 text-center sm:px-6 lg:px-8">
-        <p className="text-neutral-500">Loading orders…</p>
+        <p className="text-sm text-slate-400 animate-pulse">Loading orders…</p>
       </div>
     );
   }
@@ -29,7 +29,7 @@ export default function OrdersPage() {
   if (error) {
     return (
       <div className="mx-auto max-w-7xl px-4 py-12 text-center sm:px-6 lg:px-8">
-        <p className="text-red-600">Could not load your orders. Please try again later.</p>
+        <p className="text-sm text-red-400">Could not load your orders. Please try again later.</p>
       </div>
     );
   }
@@ -39,11 +39,11 @@ export default function OrdersPage() {
   if (orders.length === 0) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6 lg:px-8">
-        <h1 className="text-2xl font-bold text-neutral-900">Your orders</h1>
-        <p className="mt-2 text-neutral-600">You haven&apos;t placed any orders yet.</p>
+        <h1 className="text-3xl font-black text-white">Your orders</h1>
+        <p className="mt-2 text-sm text-slate-400">You haven&apos;t placed any orders yet.</p>
         <Link
           href="/products"
-          className="mt-6 inline-block rounded-md bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-700"
+          className="glow-button mt-6 inline-block rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-3 text-sm font-bold text-white transition-all"
         >
           Browse products
         </Link>
@@ -53,37 +53,37 @@ export default function OrdersPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold tracking-tight text-neutral-900">Your orders</h1>
+      <h1 className="text-4xl font-black tracking-tight text-white">Your orders</h1>
 
-      <div className="mt-8 overflow-hidden rounded-xl border border-neutral-200 bg-white">
-        <table className="w-full text-sm">
-          <thead className="border-b border-neutral-200 bg-neutral-50 text-left">
+      <div className="mt-8 overflow-hidden rounded-2xl glass-panel">
+        <table className="w-full text-sm text-left">
+          <thead className="border-b border-white/5 bg-slate-900/30 text-slate-300 font-bold text-xs uppercase tracking-wider">
             <tr>
-              <th className="px-4 py-3 font-semibold text-neutral-700">Order #</th>
-              <th className="px-4 py-3 font-semibold text-neutral-700">Status</th>
-              <th className="px-4 py-3 font-semibold text-neutral-700">Date</th>
-              <th className="px-4 py-3 text-right font-semibold text-neutral-700">Total</th>
+              <th className="px-5 py-4 font-bold">Order #</th>
+              <th className="px-5 py-4 font-bold">Status</th>
+              <th className="px-5 py-4 font-bold">Date</th>
+              <th className="px-5 py-4 text-right font-bold">Total</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-neutral-200">
+          <tbody className="divide-y divide-white/5">
             {orders.map((order) => (
-              <tr key={order.id} className="hover:bg-neutral-50">
-                <td className="px-4 py-3 font-medium text-neutral-900">
+              <tr key={order.id} className="hover:bg-white/5 transition-colors duration-300">
+                <td className="px-5 py-4 font-bold text-white font-mono text-sm">
                   {order.orderNumber}
                 </td>
-                <td className="px-4 py-3">
+                <td className="px-5 py-4">
                   <span
-                    className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                      statusColor[order.status] || 'bg-neutral-100 text-neutral-700'
+                    className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+                      statusColor[order.status] || 'bg-slate-800 text-slate-300'
                     }`}
                   >
                     {order.status}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-neutral-600">
+                <td className="px-5 py-4 text-slate-400">
                   {new Date(order.createdAt as string).toLocaleDateString()}
                 </td>
-                <td className="px-4 py-3 text-right font-semibold text-neutral-900">
+                <td className="px-5 py-4 text-right font-black text-white text-base">
                   ${Number(order.total).toFixed(2)}
                 </td>
               </tr>

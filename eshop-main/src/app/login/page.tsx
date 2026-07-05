@@ -36,11 +36,11 @@ function AuthForm() {
   };
 
   return (
-    <div className="rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm">
-      <h1 className="text-2xl font-bold tracking-tight text-neutral-900">
-        {mode === 'login' ? 'Welcome back' : 'Create your account'}
+    <div className="rounded-2xl glass-panel p-8 shadow-2xl">
+      <h1 className="text-3xl font-black tracking-tight text-white">
+        {mode === 'login' ? 'Welcome back' : 'Create account'}
       </h1>
-      <p className="mt-1 text-sm text-neutral-600">
+      <p className="mt-1 text-sm text-slate-400">
         {mode === 'login'
           ? 'Sign in to your Eshop account to continue.'
           : 'Sign up to start shopping with Eshop.'}
@@ -50,7 +50,7 @@ function AuthForm() {
         {mode === 'register' && (
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label htmlFor="firstName" className="block text-sm font-medium text-neutral-700">
+              <label htmlFor="firstName" className="block text-xs font-bold uppercase tracking-wider text-slate-300">
                 First name
               </label>
               <input
@@ -58,11 +58,11 @@ function AuthForm() {
                 type="text"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="mt-1.5 w-full rounded-xl border border-white/5 bg-slate-900/50 px-3 py-2 text-sm text-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
               />
             </div>
             <div>
-              <label htmlFor="lastName" className="block text-sm font-medium text-neutral-700">
+              <label htmlFor="lastName" className="block text-xs font-bold uppercase tracking-wider text-slate-300">
                 Last name
               </label>
               <input
@@ -70,15 +70,15 @@ function AuthForm() {
                 type="text"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="mt-1.5 w-full rounded-xl border border-white/5 bg-slate-900/50 px-3 py-2 text-sm text-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
               />
             </div>
           </div>
         )}
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-neutral-700">
-            Email
+          <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-slate-300">
+            Email address
           </label>
           <input
             id="email"
@@ -86,12 +86,12 @@ function AuthForm() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="mt-1.5 w-full rounded-xl border border-white/5 bg-slate-900/50 px-3 py-2 text-sm text-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           />
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-neutral-700">
+          <label htmlFor="password" className="block text-xs font-bold uppercase tracking-wider text-slate-300">
             Password
           </label>
           <input
@@ -100,12 +100,12 @@ function AuthForm() {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="mt-1.5 w-full rounded-xl border border-white/5 bg-slate-900/50 px-3 py-2 text-sm text-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           />
         </div>
 
         {error && (
-          <div className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">
+          <div className="rounded-xl bg-red-500/10 border border-red-500/20 px-3 py-2 text-xs font-semibold text-red-400">
             {error}
           </div>
         )}
@@ -113,7 +113,7 @@ function AuthForm() {
         <button
           type="submit"
           disabled={submitting}
-          className="w-full rounded-md bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 disabled:opacity-50"
+          className="glow-button w-full rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-3 text-sm font-bold text-white transition-all disabled:opacity-50"
         >
           {submitting
             ? 'Please wait…'
@@ -123,7 +123,7 @@ function AuthForm() {
         </button>
       </form>
 
-      <div className="mt-6 text-center text-sm text-neutral-600">
+      <div className="mt-6 text-center text-sm text-slate-400">
         {mode === 'login' ? (
           <>
             Don&apos;t have an account?{' '}
@@ -132,7 +132,7 @@ function AuthForm() {
                 setMode('register');
                 setError(null);
               }}
-              className="font-medium text-blue-600 hover:text-blue-700"
+              className="font-bold text-indigo-400 hover:text-indigo-300 transition-colors"
             >
               Sign up
             </button>
@@ -145,7 +145,7 @@ function AuthForm() {
                 setMode('login');
                 setError(null);
               }}
-              className="font-medium text-blue-600 hover:text-blue-700"
+              className="font-bold text-indigo-400 hover:text-indigo-300 transition-colors"
             >
               Sign in
             </button>
@@ -158,14 +158,19 @@ function AuthForm() {
 
 export default function LoginPage() {
   return (
-    <div className="flex min-h-[calc(100vh-200px)] items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md">
-        <Suspense fallback={<div className="rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm">Loading…</div>}>
+    <div className="relative min-h-[calc(100vh-200px)] flex items-center justify-center px-4 py-12">
+      {/* Decorative Blob */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="animate-blob absolute top-[20%] left-[30%] h-96 w-96 rounded-full bg-indigo-600/5 blur-3xl" />
+      </div>
+
+      <div className="relative w-full max-w-md">
+        <Suspense fallback={<div className="rounded-2xl glass-panel p-8 shadow-2xl text-center text-slate-400">Loading…</div>}>
           <AuthForm />
         </Suspense>
 
-        <p className="mt-4 text-center text-xs text-neutral-400">
-          <Link href="/" className="hover:text-neutral-600">
+        <p className="mt-6 text-center text-xs text-slate-500">
+          <Link href="/" className="hover:text-slate-300 transition-colors font-medium">
             ← Back to home
           </Link>
         </p>

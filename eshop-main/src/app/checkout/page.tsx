@@ -62,119 +62,126 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold tracking-tight text-neutral-900">Checkout</h1>
-      <p className="mt-2 text-neutral-600">
-        Enter your shipping address to place your order.
-      </p>
+    <div className="relative min-h-screen">
+      {/* Decorative Blob */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="animate-blob absolute top-[10%] left-[20%] h-96 w-96 rounded-full bg-violet-600/5 blur-3xl" />
+      </div>
 
-      <form onSubmit={handleSubmit} className="mt-8 space-y-4 rounded-xl border border-neutral-200 bg-white p-6">
-        <div>
-          <label htmlFor="fullName" className="block text-sm font-medium text-neutral-700">
-            Full name
-          </label>
-          <input
-            id="fullName"
-            required
-            value={form.fullName}
-            onChange={(e) => update('fullName', e.target.value)}
-            className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-          />
-        </div>
+      <div className="relative mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
+        <h1 className="text-4xl font-black tracking-tight text-white">Checkout</h1>
+        <p className="mt-2 text-sm text-slate-400">
+          Enter your shipping address to place your order.
+        </p>
 
-        <div>
-          <label htmlFor="addressLine1" className="block text-sm font-medium text-neutral-700">
-            Address line 1
-          </label>
-          <input
-            id="addressLine1"
-            required
-            value={form.addressLine1}
-            onChange={(e) => update('addressLine1', e.target.value)}
-            className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="addressLine2" className="block text-sm font-medium text-neutral-700">
-            Address line 2 (optional)
-          </label>
-          <input
-            id="addressLine2"
-            value={form.addressLine2}
-            onChange={(e) => update('addressLine2', e.target.value)}
-            className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-          />
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
+        <form onSubmit={handleSubmit} className="mt-8 space-y-5 rounded-2xl glass-panel p-8 shadow-2xl">
           <div>
-            <label htmlFor="city" className="block text-sm font-medium text-neutral-700">
-              City
+            <label htmlFor="fullName" className="block text-xs font-bold uppercase tracking-wider text-slate-300">
+              Full name
             </label>
             <input
-              id="city"
+              id="fullName"
               required
-              value={form.city}
-              onChange={(e) => update('city', e.target.value)}
-              className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              value={form.fullName}
+              onChange={(e) => update('fullName', e.target.value)}
+              className="mt-1.5 w-full rounded-xl border border-white/5 bg-slate-900/50 px-3 py-2.5 text-sm text-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             />
           </div>
+
           <div>
-            <label htmlFor="state" className="block text-sm font-medium text-neutral-700">
-              State / Province
+            <label htmlFor="addressLine1" className="block text-xs font-bold uppercase tracking-wider text-slate-300">
+              Address line 1
             </label>
             <input
-              id="state"
+              id="addressLine1"
               required
-              value={form.state}
-              onChange={(e) => update('state', e.target.value)}
-              className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              value={form.addressLine1}
+              onChange={(e) => update('addressLine1', e.target.value)}
+              className="mt-1.5 w-full rounded-xl border border-white/5 bg-slate-900/50 px-3 py-2.5 text-sm text-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             />
           </div>
-        </div>
 
-        <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="postalCode" className="block text-sm font-medium text-neutral-700">
-              Postal code
+            <label htmlFor="addressLine2" className="block text-xs font-bold uppercase tracking-wider text-slate-300">
+              Address line 2 (optional)
             </label>
             <input
-              id="postalCode"
-              required
-              value={form.postalCode}
-              onChange={(e) => update('postalCode', e.target.value)}
-              className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              id="addressLine2"
+              value={form.addressLine2}
+              onChange={(e) => update('addressLine2', e.target.value)}
+              className="mt-1.5 w-full rounded-xl border border-white/5 bg-slate-900/50 px-3 py-2.5 text-sm text-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             />
           </div>
-          <div>
-            <label htmlFor="country" className="block text-sm font-medium text-neutral-700">
-              Country
-            </label>
-            <input
-              id="country"
-              required
-              value={form.country}
-              onChange={(e) => update('country', e.target.value)}
-              className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
-        </div>
 
-        {error && (
-          <div className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">
-            {error}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="city" className="block text-xs font-bold uppercase tracking-wider text-slate-300">
+                City
+              </label>
+              <input
+                id="city"
+                required
+                value={form.city}
+                onChange={(e) => update('city', e.target.value)}
+                className="mt-1.5 w-full rounded-xl border border-white/5 bg-slate-900/50 px-3 py-2.5 text-sm text-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              />
+            </div>
+            <div>
+              <label htmlFor="state" className="block text-xs font-bold uppercase tracking-wider text-slate-300">
+                State / Province
+              </label>
+              <input
+                id="state"
+                required
+                value={form.state}
+                onChange={(e) => update('state', e.target.value)}
+                className="mt-1.5 w-full rounded-xl border border-white/5 bg-slate-900/50 px-3 py-2.5 text-sm text-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              />
+            </div>
           </div>
-        )}
 
-        <button
-          type="submit"
-          disabled={submitting}
-          className="w-full rounded-md bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700 disabled:opacity-50"
-        >
-          {submitting ? 'Placing order…' : 'Place order'}
-        </button>
-      </form>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="postalCode" className="block text-xs font-bold uppercase tracking-wider text-slate-300">
+                Postal code
+              </label>
+              <input
+                id="postalCode"
+                required
+                value={form.postalCode}
+                onChange={(e) => update('postalCode', e.target.value)}
+                className="mt-1.5 w-full rounded-xl border border-white/5 bg-slate-900/50 px-3 py-2.5 text-sm text-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              />
+            </div>
+            <div>
+              <label htmlFor="country" className="block text-xs font-bold uppercase tracking-wider text-slate-300">
+                Country
+              </label>
+              <input
+                id="country"
+                required
+                value={form.country}
+                onChange={(e) => update('country', e.target.value)}
+                className="mt-1.5 w-full rounded-xl border border-white/5 bg-slate-900/50 px-3 py-2.5 text-sm text-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              />
+            </div>
+          </div>
+
+          {error && (
+            <div className="rounded-xl bg-red-500/10 border border-red-500/20 px-3 py-2 text-xs font-semibold text-red-400">
+              {error}
+            </div>
+          )}
+
+          <button
+            type="submit"
+            disabled={submitting}
+            className="glow-button w-full rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-3.5 text-sm font-bold text-white transition-all disabled:opacity-50"
+          >
+            {submitting ? 'Placing order…' : 'Place order'}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
