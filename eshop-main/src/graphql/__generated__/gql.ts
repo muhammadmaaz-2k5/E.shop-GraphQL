@@ -1,0 +1,52 @@
+/* eslint-disable */
+import * as types from './graphql';
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
+
+/**
+ * Map of all GraphQL operations in the project.
+ *
+ * This map has several performance disadvantages:
+ * 1. It is not tree-shakeable, so it will include all operations in the project.
+ * 2. It is not minifiable, so the string of a GraphQL query will be multiple times inside the bundle.
+ * 3. It does not support dead code elimination, so it will add unused operations.
+ *
+ * Therefore it is highly recommended to use the babel or swc plugin for production.
+ * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
+ */
+type Documents = {
+    "mutation Login($email: String!, $password: String!) {\n  login(input: {email: $email, password: $password}) {\n    accessToken\n    refreshToken\n    expiresIn\n    user {\n      id\n      email\n      role\n    }\n  }\n}\n\nmutation Register($email: String!, $password: String!, $firstName: String, $lastName: String) {\n  register(\n    input: {email: $email, password: $password, firstName: $firstName, lastName: $lastName}\n  ) {\n    accessToken\n    refreshToken\n    expiresIn\n    user {\n      id\n      email\n      role\n    }\n  }\n}\n\nmutation RefreshToken($token: String!) {\n  refreshToken(token: $token) {\n    accessToken\n    refreshToken\n    expiresIn\n  }\n}\n\nmutation AddToCart($productId: ID!, $quantity: Int!) {\n  addToCart(input: {productId: $productId, quantity: $quantity}) {\n    id\n    subtotal\n    total\n    items {\n      id\n      productId\n      quantity\n      unitPrice\n      totalPrice\n    }\n  }\n}\n\nmutation RemoveFromCart($itemId: ID!) {\n  removeFromCart(itemId: $itemId)\n}\n\nmutation CreateOrder($shippingAddress: OrderAddressInput!) {\n  createOrder(input: {shippingAddress: $shippingAddress}) {\n    id\n    orderNumber\n    status\n    total\n  }\n}": typeof types.LoginDocument,
+    "query GetProducts($first: Int, $after: String) {\n  products(pagination: {first: $first, after: $after}) {\n    edges {\n      node {\n        id\n        name\n        sku\n        price\n        slug\n        description\n        thumbnailUrl\n      }\n    }\n    totalCount\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nquery GetProduct($slug: String!) {\n  productBySlug(slug: $slug) {\n    id\n    name\n    sku\n    price\n    slug\n    description\n    thumbnailUrl\n  }\n}\n\nquery GetMe {\n  me {\n    id\n    email\n    role\n    firstName\n    lastName\n  }\n}\n\nquery GetCart {\n  cart {\n    id\n    subtotal\n    total\n    items {\n      id\n      productId\n      quantity\n      unitPrice\n      totalPrice\n      product {\n        id\n        name\n        thumbnailUrl\n      }\n    }\n  }\n}\n\nquery GetOrders {\n  orders {\n    id\n    orderNumber\n    status\n    total\n    createdAt\n  }\n}": typeof types.GetProductsDocument,
+};
+const documents: Documents = {
+    "mutation Login($email: String!, $password: String!) {\n  login(input: {email: $email, password: $password}) {\n    accessToken\n    refreshToken\n    expiresIn\n    user {\n      id\n      email\n      role\n    }\n  }\n}\n\nmutation Register($email: String!, $password: String!, $firstName: String, $lastName: String) {\n  register(\n    input: {email: $email, password: $password, firstName: $firstName, lastName: $lastName}\n  ) {\n    accessToken\n    refreshToken\n    expiresIn\n    user {\n      id\n      email\n      role\n    }\n  }\n}\n\nmutation RefreshToken($token: String!) {\n  refreshToken(token: $token) {\n    accessToken\n    refreshToken\n    expiresIn\n  }\n}\n\nmutation AddToCart($productId: ID!, $quantity: Int!) {\n  addToCart(input: {productId: $productId, quantity: $quantity}) {\n    id\n    subtotal\n    total\n    items {\n      id\n      productId\n      quantity\n      unitPrice\n      totalPrice\n    }\n  }\n}\n\nmutation RemoveFromCart($itemId: ID!) {\n  removeFromCart(itemId: $itemId)\n}\n\nmutation CreateOrder($shippingAddress: OrderAddressInput!) {\n  createOrder(input: {shippingAddress: $shippingAddress}) {\n    id\n    orderNumber\n    status\n    total\n  }\n}": types.LoginDocument,
+    "query GetProducts($first: Int, $after: String) {\n  products(pagination: {first: $first, after: $after}) {\n    edges {\n      node {\n        id\n        name\n        sku\n        price\n        slug\n        description\n        thumbnailUrl\n      }\n    }\n    totalCount\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nquery GetProduct($slug: String!) {\n  productBySlug(slug: $slug) {\n    id\n    name\n    sku\n    price\n    slug\n    description\n    thumbnailUrl\n  }\n}\n\nquery GetMe {\n  me {\n    id\n    email\n    role\n    firstName\n    lastName\n  }\n}\n\nquery GetCart {\n  cart {\n    id\n    subtotal\n    total\n    items {\n      id\n      productId\n      quantity\n      unitPrice\n      totalPrice\n      product {\n        id\n        name\n        thumbnailUrl\n      }\n    }\n  }\n}\n\nquery GetOrders {\n  orders {\n    id\n    orderNumber\n    status\n    total\n    createdAt\n  }\n}": types.GetProductsDocument,
+};
+
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ *
+ *
+ * @example
+ * ```ts
+ * const query = gql(`query GetUser($id: ID!) { user(id: $id) { name } }`);
+ * ```
+ *
+ * The query argument is unknown!
+ * Please regenerate the types.
+ */
+export function gql(source: string): unknown;
+
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "mutation Login($email: String!, $password: String!) {\n  login(input: {email: $email, password: $password}) {\n    accessToken\n    refreshToken\n    expiresIn\n    user {\n      id\n      email\n      role\n    }\n  }\n}\n\nmutation Register($email: String!, $password: String!, $firstName: String, $lastName: String) {\n  register(\n    input: {email: $email, password: $password, firstName: $firstName, lastName: $lastName}\n  ) {\n    accessToken\n    refreshToken\n    expiresIn\n    user {\n      id\n      email\n      role\n    }\n  }\n}\n\nmutation RefreshToken($token: String!) {\n  refreshToken(token: $token) {\n    accessToken\n    refreshToken\n    expiresIn\n  }\n}\n\nmutation AddToCart($productId: ID!, $quantity: Int!) {\n  addToCart(input: {productId: $productId, quantity: $quantity}) {\n    id\n    subtotal\n    total\n    items {\n      id\n      productId\n      quantity\n      unitPrice\n      totalPrice\n    }\n  }\n}\n\nmutation RemoveFromCart($itemId: ID!) {\n  removeFromCart(itemId: $itemId)\n}\n\nmutation CreateOrder($shippingAddress: OrderAddressInput!) {\n  createOrder(input: {shippingAddress: $shippingAddress}) {\n    id\n    orderNumber\n    status\n    total\n  }\n}"): (typeof documents)["mutation Login($email: String!, $password: String!) {\n  login(input: {email: $email, password: $password}) {\n    accessToken\n    refreshToken\n    expiresIn\n    user {\n      id\n      email\n      role\n    }\n  }\n}\n\nmutation Register($email: String!, $password: String!, $firstName: String, $lastName: String) {\n  register(\n    input: {email: $email, password: $password, firstName: $firstName, lastName: $lastName}\n  ) {\n    accessToken\n    refreshToken\n    expiresIn\n    user {\n      id\n      email\n      role\n    }\n  }\n}\n\nmutation RefreshToken($token: String!) {\n  refreshToken(token: $token) {\n    accessToken\n    refreshToken\n    expiresIn\n  }\n}\n\nmutation AddToCart($productId: ID!, $quantity: Int!) {\n  addToCart(input: {productId: $productId, quantity: $quantity}) {\n    id\n    subtotal\n    total\n    items {\n      id\n      productId\n      quantity\n      unitPrice\n      totalPrice\n    }\n  }\n}\n\nmutation RemoveFromCart($itemId: ID!) {\n  removeFromCart(itemId: $itemId)\n}\n\nmutation CreateOrder($shippingAddress: OrderAddressInput!) {\n  createOrder(input: {shippingAddress: $shippingAddress}) {\n    id\n    orderNumber\n    status\n    total\n  }\n}"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "query GetProducts($first: Int, $after: String) {\n  products(pagination: {first: $first, after: $after}) {\n    edges {\n      node {\n        id\n        name\n        sku\n        price\n        slug\n        description\n        thumbnailUrl\n      }\n    }\n    totalCount\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nquery GetProduct($slug: String!) {\n  productBySlug(slug: $slug) {\n    id\n    name\n    sku\n    price\n    slug\n    description\n    thumbnailUrl\n  }\n}\n\nquery GetMe {\n  me {\n    id\n    email\n    role\n    firstName\n    lastName\n  }\n}\n\nquery GetCart {\n  cart {\n    id\n    subtotal\n    total\n    items {\n      id\n      productId\n      quantity\n      unitPrice\n      totalPrice\n      product {\n        id\n        name\n        thumbnailUrl\n      }\n    }\n  }\n}\n\nquery GetOrders {\n  orders {\n    id\n    orderNumber\n    status\n    total\n    createdAt\n  }\n}"): (typeof documents)["query GetProducts($first: Int, $after: String) {\n  products(pagination: {first: $first, after: $after}) {\n    edges {\n      node {\n        id\n        name\n        sku\n        price\n        slug\n        description\n        thumbnailUrl\n      }\n    }\n    totalCount\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nquery GetProduct($slug: String!) {\n  productBySlug(slug: $slug) {\n    id\n    name\n    sku\n    price\n    slug\n    description\n    thumbnailUrl\n  }\n}\n\nquery GetMe {\n  me {\n    id\n    email\n    role\n    firstName\n    lastName\n  }\n}\n\nquery GetCart {\n  cart {\n    id\n    subtotal\n    total\n    items {\n      id\n      productId\n      quantity\n      unitPrice\n      totalPrice\n      product {\n        id\n        name\n        thumbnailUrl\n      }\n    }\n  }\n}\n\nquery GetOrders {\n  orders {\n    id\n    orderNumber\n    status\n    total\n    createdAt\n  }\n}"];
+
+export function gql(source: string) {
+  return (documents as any)[source] ?? {};
+}
+
+export type DocumentType<TDocumentNode extends DocumentNode<any, any>> = TDocumentNode extends DocumentNode<  infer TType,  any>  ? TType  : never;

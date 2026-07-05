@@ -7,11 +7,11 @@ import { pubsub } from './index.js';
 export async function buildGraphQLSchema() {
   const { ProductResolver, CategoryResolver, BrandResolver } = await import('./modules/product/index.js');
   const { AuthResolver, UserTypeResolver } = await import('./modules/auth/index.js');
-  const { CartResolver } = await import('./graphql/cart.resolver.js');
+  const { CartResolver, CartItemResolver } = await import('./graphql/cart.resolver.js');
   const { OrderResolver } = await import('./graphql/order.resolver.js');
 
   const schema = await buildSchema({
-    resolvers: [AuthResolver, UserTypeResolver, ProductResolver, CategoryResolver, BrandResolver, CartResolver, OrderResolver],
+    resolvers: [AuthResolver, UserTypeResolver, ProductResolver, CategoryResolver, BrandResolver, CartResolver, CartItemResolver, OrderResolver],
     scalarsMap: [
       { type: Date, scalar: DateTimeScalar },
       { type: Object, scalar: JSONScalar },

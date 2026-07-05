@@ -55,7 +55,7 @@ class ProductDimensions {
 }
 
 @ObjectType()
-class ProductType {
+export class ProductType {
   @Field(() => ID)
   id!: string;
 

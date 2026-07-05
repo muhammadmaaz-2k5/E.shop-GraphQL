@@ -52,6 +52,11 @@ query GetCart {
       quantity
       unitPrice
       totalPrice
+      product {
+        id
+        name
+        thumbnailUrl
+      }
     }
   }
 }

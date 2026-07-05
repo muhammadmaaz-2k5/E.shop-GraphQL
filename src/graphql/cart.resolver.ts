@@ -9,13 +9,16 @@ import {
   ObjectType,
   Int,
   ID,
+  FieldResolver,
+  Root,
 } from 'type-graphql';
 import { GraphQLContext, requireAuth } from '../shared/graphql/context.js';
 import { CartRepository, Cart } from '../modules/cart/index.js';
 import { DateTimeScalar } from '../shared/graphql/scalars/index.js';
+import { ProductType } from '../modules/product/graphql/product.resolver.js';
 
 @ObjectType()
-class CartItemType {
+export class CartItemType {
   @Field(() => ID)
   id!: string;
 
@@ -30,6 +33,9 @@ class CartItemType {
 
   @Field(() => Number)
   totalPrice!: number;
+
+  @Field(() => ProductType, { nullable: true })
+  product?: ProductType;
 }
 
 @ObjectType()
@@ -150,3 +156,12 @@ export class CartResolver {
     };
   }
 }
+
+@Resolver(() => CartItemType)
+export class CartItemResolver {
+  @FieldResolver(() => ProductType, { nullable: true })
+  async product(@Root() item: CartItemType, @Ctx() ctx: GraphQLContext): Promise<ProductType | null> {
+    return ctx.loaders.productById.load(item.productId);
+  }
+}
+

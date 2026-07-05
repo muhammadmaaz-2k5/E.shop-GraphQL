@@ -44,7 +44,7 @@ mutation RefreshToken($token: String!) {
   }
 }
 
-mutation AddToCart($productId: String!, $quantity: Int!) {
+mutation AddToCart($productId: ID!, $quantity: Int!) {
   addToCart(input: { productId: $productId, quantity: $quantity }) {
     id
     subtotal
@@ -59,22 +59,11 @@ mutation AddToCart($productId: String!, $quantity: Int!) {
   }
 }
 
-mutation RemoveFromCart($itemId: String!) {
-  removeFromCart(input: { itemId: $itemId }) {
-    id
-    subtotal
-    total
-    items {
-      id
-      productId
-      quantity
-      unitPrice
-      totalPrice
-    }
-  }
+mutation RemoveFromCart($itemId: ID!) {
+  removeFromCart(itemId: $itemId)
 }
 
-mutation CreateOrder($shippingAddress: JSON!) {
+mutation CreateOrder($shippingAddress: OrderAddressInput!) {
   createOrder(input: { shippingAddress: $shippingAddress }) {
     id
     orderNumber

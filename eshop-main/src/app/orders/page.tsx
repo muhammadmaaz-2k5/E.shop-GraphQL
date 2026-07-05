@@ -34,7 +34,7 @@ export default function OrdersPage() {
     );
   }
 
-  const orders = data?.orders?.edges.map((e) => e.node) ?? [];
+  const orders = data?.orders ?? [];
 
   if (orders.length === 0) {
     return (
@@ -81,7 +81,7 @@ export default function OrdersPage() {
                   </span>
                 </td>
                 <td className="px-4 py-3 text-neutral-600">
-                  {new Date(order.createdAt).toLocaleDateString()}
+                  {new Date(order.createdAt as string).toLocaleDateString()}
                 </td>
                 <td className="px-4 py-3 text-right font-semibold text-neutral-900">
                   ${Number(order.total).toFixed(2)}

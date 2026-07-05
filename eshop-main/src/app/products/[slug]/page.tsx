@@ -20,7 +20,7 @@ export default async function ProductDetailPage({
 }: {
   params: { slug: string };
 }) {
-  let product: GetProductQuery['product'] | null = null;
+  let product: GetProductQuery['productBySlug'] | null = null;
 
   try {
     const client = getClient();
@@ -28,7 +28,7 @@ export default async function ProductDetailPage({
       query: GetProductDocument,
       variables: { slug: params.slug },
     });
-    product = data?.product ?? null;
+    product = data?.productBySlug ?? null;
   } catch {
     product = null;
   }
@@ -59,18 +59,12 @@ export default async function ProductDetailPage({
           </p>
           <p className="mt-6 text-neutral-700">{product.description}</p>
 
-          {typeof product.stock === 'number' && (
-            <p className="mt-4 text-sm">
-              {product.stock > 0 ? (
-                <span className="text-green-700">In stock ({product.stock} available)</span>
-              ) : (
-                <span className="text-red-600">Out of stock</span>
-              )}
-            </p>
-          )}
+          <p className="mt-4 text-sm">
+            <span className="text-green-700">In stock</span>
+          </p>
 
           <div className="mt-8">
-            <AddToCartButton productId={product.id} maxQuantity={product.stock ?? 99} />
+            <AddToCartButton productId={product.id} maxQuantity={99} />
           </div>
         </div>
       </div>

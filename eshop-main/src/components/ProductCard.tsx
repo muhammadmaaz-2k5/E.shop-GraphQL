@@ -9,7 +9,9 @@ import {
   type AddToCartMutation,
 } from '@/graphql/__generated__/graphql';
 import { getAccessToken } from '@/lib/auth';
-import type { Product } from '@/graphql/__generated__/graphql';
+import type { GetProductsQuery } from '@/graphql/__generated__/graphql';
+
+type Product = GetProductsQuery['products']['edges'][number]['node'];
 
 const PLACEHOLDER =
   'data:image/svg+xml;utf8,' +
