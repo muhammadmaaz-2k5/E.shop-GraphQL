@@ -12,7 +12,7 @@ export const dynamic = 'force-dynamic';
 const PLACEHOLDER =
   'data:image/svg+xml;utf8,' +
   encodeURIComponent(
-    `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="450"><rect width="600" height="450" fill="#e5e7eb"/><text x="50%" y="50%" font-family="sans-serif" font-size="20" fill="#9ca3af" text-anchor="middle" dominant-baseline="middle">No image</text></svg>`
+    `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="450"><rect width="600" height="450" fill="#1e293b"/><text x="50%" y="50%" font-family="sans-serif" font-size="20" fill="#64748b" text-anchor="middle" dominant-baseline="middle">No image</text></svg>`
   );
 
 export default async function ProductDetailPage({
@@ -39,33 +39,42 @@ export default async function ProductDetailPage({
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-        <div className="aspect-square overflow-hidden rounded-xl border border-neutral-200 bg-neutral-100">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={product.thumbnailUrl || PLACEHOLDER}
-            alt={product.name}
-            className="h-full w-full object-cover"
-          />
-        </div>
+    <div className="relative min-h-screen">
+      {/* Decorative Blob */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="animate-blob absolute top-[20%] -left-40 h-96 w-96 rounded-full bg-violet-600/5 blur-3xl" />
+      </div>
 
-        <div className="flex flex-col">
-          <h1 className="text-3xl font-bold tracking-tight text-neutral-900">
-            {product.name}
-          </h1>
-          <p className="mt-1 text-sm text-neutral-500">SKU: {product.sku}</p>
-          <p className="mt-4 text-3xl font-bold text-neutral-900">
-            ${Number(product.price).toFixed(2)}
-          </p>
-          <p className="mt-6 text-neutral-700">{product.description}</p>
+      <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          <div className="aspect-square overflow-hidden rounded-2xl glass-panel bg-slate-950/40">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={product.thumbnailUrl || PLACEHOLDER}
+              alt={product.name}
+              className="h-full w-full object-cover"
+            />
+          </div>
 
-          <p className="mt-4 text-sm">
-            <span className="text-green-700">In stock</span>
-          </p>
+          <div className="flex flex-col justify-center">
+            <h1 className="text-4xl font-black tracking-tight text-white sm:text-5xl">
+              {product.name}
+            </h1>
+            <p className="mt-2 text-sm text-slate-400 font-medium">SKU: {product.sku}</p>
+            <p className="mt-4 text-3xl font-black text-white">
+              ${Number(product.price).toFixed(2)}
+            </p>
+            <p className="mt-6 text-base text-slate-300 leading-relaxed max-w-xl">
+              {product.description}
+            </p>
 
-          <div className="mt-8">
-            <AddToCartButton productId={product.id} maxQuantity={99} />
+            <p className="mt-5 text-sm">
+              <span className="text-green-400 font-bold">✓ In stock</span>
+            </p>
+
+            <div className="mt-8">
+              <AddToCartButton productId={product.id} maxQuantity={99} />
+            </div>
           </div>
         </div>
       </div>

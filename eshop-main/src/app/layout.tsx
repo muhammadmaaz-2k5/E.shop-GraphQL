@@ -37,12 +37,12 @@ export default function RootLayout({
       <body className={inter.className}>
         <ApolloWrapper>
           <div className="flex min-h-screen flex-col">
-            <Suspense fallback={<div className="h-[65px] border-b border-neutral-200 bg-white" />}>
+            <Suspense fallback={<div className="h-[65px] border-b border-white/5 bg-slate-950/70" />}>
               <Navbar />
             </Suspense>
             <main className="flex-1">{children}</main>
-            <footer className="border-t border-neutral-200 bg-neutral-50 py-6">
-              <div className="mx-auto max-w-7xl px-4 text-center text-sm text-neutral-500 sm:px-6 lg:px-8">
+            <footer className="border-t border-white/5 bg-slate-950/40 py-6">
+              <div className="mx-auto max-w-7xl px-4 text-center text-sm text-slate-500 sm:px-6 lg:px-8">
                 Eshop Storefront &copy; {new Date().getFullYear()}
               </div>
             </footer>
