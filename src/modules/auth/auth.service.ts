@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { createHash } from 'crypto';
+import { createHash, randomUUID } from 'crypto';
 import { Sequelize } from 'sequelize';
 import bcrypt from 'bcryptjs';
 import { AuthUser as AuthUserModel, User as UserModel, RefreshToken as RefreshTokenModel } from '../../shared/infrastructure/database/index.js';
@@ -163,9 +163,11 @@ async function createTokens(user: User): Promise<AuthTokens> {
     { expiresIn: expiresInSeconds }
   );
 
-  const refreshToken = jwt.sign({ userId: user.id, type: 'refresh' }, config.jwt.secret, {
-    expiresIn: refreshExpiresInSeconds,
-  });
+  const refreshToken = jwt.sign(
+    { userId: user.id, type: 'refresh', jti: randomUUID() },
+    config.jwt.secret,
+    { expiresIn: refreshExpiresInSeconds }
+  );
 
   const decoded = jwt.decode(accessToken) as JWTPayloadData;
   

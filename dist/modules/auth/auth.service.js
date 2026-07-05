@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { createHash } from 'crypto';
+import { createHash, randomUUID } from 'crypto';
 import bcrypt from 'bcryptjs';
 import { AuthUser as AuthUserModel, User as UserModel, RefreshToken as RefreshTokenModel } from '../../shared/infrastructure/database/index.js';
 import { config } from '../../config/index.js';
@@ -114,9 +114,7 @@ async function createTokens(user) {
     const expiresInSeconds = parseInt(config.jwt.expiresIn) || 900;
     const refreshExpiresInSeconds = parseInt(config.jwt.refreshExpiresIn) || 604800;
     const accessToken = jwt.sign({ userId: user.id, email: user.email, role: user.role, permissions: user.permissions }, config.jwt.secret, { expiresIn: expiresInSeconds });
-    const refreshToken = jwt.sign({ userId: user.id, type: 'refresh' }, config.jwt.secret, {
-        expiresIn: refreshExpiresInSeconds,
-    });
+    const refreshToken = jwt.sign({ userId: user.id, type: 'refresh', jti: randomUUID() }, config.jwt.secret, { expiresIn: refreshExpiresInSeconds });
     const decoded = jwt.decode(accessToken);
     // Store refresh token in database
     const expiresAt = new Date(Date.now() + refreshExpiresInSeconds * 1000);

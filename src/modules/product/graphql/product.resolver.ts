@@ -325,7 +325,7 @@ export class ProductResolver {
   }
 
   @Query(() => ProductType, { nullable: true })
-  async productBySlug(@Arg('slug') slug: string, @Ctx() ctx: GraphQLContext): Promise<ProductType | null> {
+  async productBySlug(@Arg('slug', () => String) slug: string, @Ctx() ctx: GraphQLContext): Promise<ProductType | null> {
     const repo = new ProductRepository(ctx.db);
     const product = await repo.findBySlug(slug);
     return product ? this.mapProduct(product) : null;

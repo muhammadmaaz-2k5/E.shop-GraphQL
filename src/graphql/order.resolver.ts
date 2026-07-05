@@ -181,7 +181,7 @@ export class OrderResolver {
 
   @Mutation(() => OrderType)
   async createOrder(
-    @Arg('input') input: CreateOrderInput,
+    @Arg('input', () => CreateOrderInput) input: CreateOrderInput,
     @Ctx() ctx: GraphQLContext
   ): Promise<OrderType> {
     const user = requireAuth(ctx);
@@ -224,7 +224,7 @@ export class OrderResolver {
     return this.mapOrder(order);
   }
 
-  @Subscription({
+  @Subscription(() => OrderType, {
     topics: 'ORDER_UPDATED',
     filter: ({ payload, context }) => {
       const ctx = context as GraphQLContext;
@@ -235,7 +235,7 @@ export class OrderResolver {
     return order;
   }
 
-  @Subscription({
+  @Subscription(() => OrderType, {
     topics: 'ORDER_CREATED',
     filter: ({ payload, context }) => {
       const ctx = context as GraphQLContext;

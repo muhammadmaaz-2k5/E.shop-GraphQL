@@ -97,7 +97,7 @@ export class CartResolver {
   }
 
   @Mutation(() => CartType)
-  async addToCart(@Arg('input') input: AddToCartInput, @Ctx() ctx: GraphQLContext): Promise<CartType> {
+  async addToCart(@Arg('input', () => AddToCartInput) input: AddToCartInput, @Ctx() ctx: GraphQLContext): Promise<CartType> {
     const user = requireAuth(ctx);
     const repo = new CartRepository(ctx.db);
     const cart = await repo.addItem(user.id, input.productId, input.quantity);
@@ -105,7 +105,7 @@ export class CartResolver {
   }
 
   @Mutation(() => CartType)
-  async updateCartItem(@Arg('input') input: UpdateCartItemInput, @Ctx() ctx: GraphQLContext): Promise<CartType> {
+  async updateCartItem(@Arg('input', () => UpdateCartItemInput) input: UpdateCartItemInput, @Ctx() ctx: GraphQLContext): Promise<CartType> {
     const user = requireAuth(ctx);
     const repo = new CartRepository(ctx.db);
     const cart = await repo.updateItemQuantity(user.id, input.itemId, input.quantity);

@@ -178,8 +178,8 @@ async function main() {
   // 7. Add product to cart
   console.log('\n7. Adding product to cart (authenticated)...');
   const addToCartMutation = `
-    mutation($productId: String!) {
-      addToCart(productId: $productId, quantity: 2) {
+    mutation($input: AddToCartInput!) {
+      addToCart(input: $input) {
         id
         subtotal
         total
@@ -193,7 +193,7 @@ async function main() {
       }
     }
   `;
-  const addToCartData = await makeGraphQLRequest(addToCartMutation, { productId }, token);
+  const addToCartData = await makeGraphQLRequest(addToCartMutation, { input: { productId, quantity: 2 } }, token);
   console.log('Result:', JSON.stringify(addToCartData, null, 2));
 
   // 8. Create order from cart

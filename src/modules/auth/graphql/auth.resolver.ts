@@ -21,7 +21,7 @@ import { register, loginWithCredentials, refreshToken, logout } from '../auth.se
 export class AuthResolver {
   @Mutation(() => LoginResponseType)
   async login(
-    @Arg('input') input: LoginInputType,
+    @Arg('input', () => LoginInputType) input: LoginInputType,
     @Ctx() context: GraphQLContext
   ): Promise<LoginResponseType> {
     const result = await loginWithCredentials(input.email, input.password, context.db);
@@ -35,7 +35,7 @@ export class AuthResolver {
 
   @Mutation(() => LoginResponseType)
   async register(
-    @Arg('input') input: RegisterInputType,
+    @Arg('input', () => RegisterInputType) input: RegisterInputType,
     @Ctx() context: GraphQLContext
   ): Promise<LoginResponseType> {
     const user = await this.registerUser(context.db, input);
@@ -59,7 +59,7 @@ export class AuthResolver {
 
   @Mutation(() => RefreshTokenResponse)
   async refreshToken(
-    @Arg('token') token: string,
+    @Arg('token', () => String) token: string,
     @Ctx() context: GraphQLContext
   ): Promise<RefreshTokenResponse> {
     const result = await refreshToken(context.db, token);
